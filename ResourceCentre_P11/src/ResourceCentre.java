@@ -27,28 +27,7 @@ public class ResourceCentre {
 				ResourceCentre.viewAllChromebook(chromebookList);
 
 			} else if (option == 2) {
-				// Add a new item
-				ResourceCentre.setHeader("ADD");			
-				ResourceCentre.setHeader("ITEM TYPES");
-				System.out.println("1. Camcorder");
-				System.out.println("2. Chromebook");
-				
-				int itemType = Helper.readInt("Enter option to select item type > ");
-
-				if (itemType == 1) {
-					// Add a camcorder
-					Camcorder cc = inputCamcorder();
-					ResourceCentre.addCamcorder(camcorderList, cc);
-
-				} else if (itemType == 2) {
-					// Add Chromebook
-					Chromebook cb = inputChromebook();
-					ResourceCentre.addChromebook(chromebookList, cb);
-
-				} else {
-					System.out.println("Invalid type");
-				}
-
+				addItem(camcorderList, chromebookList);
 			} else if (option == 3) {
 				// Loan item
 				ResourceCentre.setHeader("LOAN");			
@@ -94,6 +73,39 @@ public class ResourceCentre {
 
 		}
 
+	}
+
+	private static void addItem(ArrayList<Camcorder> camcorderList, ArrayList<Chromebook> chromebookList) {
+		// Add a new item
+		menuAddItem();
+		
+		int itemType = Helper.readInt("Enter option to select item type > ");
+
+		doAddItem(camcorderList, chromebookList, itemType);
+	}
+
+	private static void doAddItem(ArrayList<Camcorder> camcorderList, ArrayList<Chromebook> chromebookList,
+			int itemType) {
+		if (itemType == 1) {
+			// Add a camcorder
+			Camcorder cc = inputCamcorder();
+			ResourceCentre.addCamcorder(camcorderList, cc);
+
+		} else if (itemType == 2) {
+			// Add Chromebook
+			Chromebook cb = inputChromebook();
+			ResourceCentre.addChromebook(chromebookList, cb);
+
+		} else {
+			System.out.println("Invalid type");
+		}
+	}
+
+	private static void menuAddItem() {
+		ResourceCentre.setHeader("ADD");			
+		ResourceCentre.setHeader("ITEM TYPES");
+		System.out.println("1. Camcorder");
+		System.out.println("2. Chromebook");
 	}
 
 	public static void menu() {
